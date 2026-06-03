@@ -1,5 +1,6 @@
 mod battery;
 mod config;
+mod threshold;
 
 use battery::{energy_wh, list_batteries, read_battery, voltage_v};
 use config::{load_config, Config};
@@ -49,4 +50,6 @@ fn main() {
             Err(e) => println!("  [{bat_path}] Error: {e}"),
         }
     }
+
+    println!("\nThreshold module loaded. Use 's' and 'e' keys in TUI to set charge thresholds.");
 }
