@@ -129,7 +129,6 @@ pub fn voltage_v(uv: u64) -> f64 {
     uv as f64 / 1_000_000.0
 }
 
-#[allow(dead_code)]
 pub fn power_w(uw: u64) -> f64 {
     uw as f64 / 1_000_000.0
 }

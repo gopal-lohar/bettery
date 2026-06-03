@@ -13,7 +13,6 @@ fn write_threshold(bat_path: &str, file: &str, value: u8) -> Result<()> {
     }
 }
 
-#[allow(dead_code)]
 pub fn set_start_threshold(bat_path: &str, value: u8) -> Result<()> {
     if value >= 100 {
         bail!("Start threshold must be < 100");
@@ -21,7 +20,6 @@ pub fn set_start_threshold(bat_path: &str, value: u8) -> Result<()> {
     write_threshold(bat_path, "charge_control_start_threshold", value)
 }
 
-#[allow(dead_code)]
 pub fn set_end_threshold(bat_path: &str, value: u8) -> Result<()> {
     if value == 0 || value > 100 {
         bail!("End threshold must be 1-100");
