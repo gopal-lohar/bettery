@@ -2,6 +2,8 @@
 
 A minimal TUI battery manager for Linux.
 
+![Bettery Dashboard](assets/dashboard.png)
+
 ## Features
 
 - Live battery stats: capacity, health, voltage, energy, power draw, cycle count, temperature, time remaining
@@ -20,17 +22,30 @@ bettery
 
 ## Usage
 
-Run as a normal user for read-only monitoring:
+### Read-Only Monitoring
+
+Run as a normal user to monitor battery stats:
 
 ```bash
 bettery
 ```
 
-Set charge thresholds with root privileges:
+If you attempt to modify thresholds in this mode, you will see a permission error:
+
+![Permission Error](assets/permission_error.png)
+
+### Setting Charge Thresholds
+
+Run with root privileges to set charge start/end thresholds:
 
 ```bash
 sudo bettery
 ```
+
+1. Press `s` (start) or `e` (end) to enter input mode and type the desired threshold:
+   ![Setting Threshold Input](assets/set_threshold_input.png)
+2. Press `Enter` to apply it:
+   ![Threshold Set Successfully](assets/threshold_set.png)
 
 ### Keybindings
 
