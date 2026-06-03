@@ -4,36 +4,60 @@ A minimal TUI battery manager for Linux.
 
 ## Features
 
-- Live battery stats: capacity, health, voltage, energy, power draw, cycle count, temperature
-- Set charge start/end thresholds (requires root)
-- Color-coded bars: green/yellow/red based on battery level and health
-- Config file at `~/.config/bettery/config.toml`
+- Live battery stats: capacity, health, voltage, energy, power draw, cycle count, temperature, time remaining
+- Color-coded bars (green/yellow/red) for capacity, health, and charge window
+- Set charge start/end thresholds on supported laptops (requires root)
+- Multiple battery support (navigate with `n`)
+- Persistent TOML config at `~/.config/bettery/config.toml`
 
-## Build
+## Build & Install
 
 ```bash
 cargo build --release
+sudo cp target/release/bettery /usr/local/bin/
+bettery
 ```
 
-## Run
+## Usage
+
+Run as a normal user for read-only monitoring:
 
 ```bash
-./target/release/bettery
+bettery
 ```
 
-Setting thresholds requires root:
+Set charge thresholds with root privileges:
 
 ```bash
-sudo ./target/release/bettery
+sudo bettery
 ```
 
-## Keybindings
+### Keybindings
 
-| Key | Action |
-|-----|--------|
-| `s` | Set start threshold |
-| `e` | Set end threshold |
-| `n` | Switch to next battery |
-| `q` | Quit |
-| `Ctrl+C` | Quit |
-| `Esc` | Cancel input |
+| Key | Mode | Action |
+|-----|------|--------|
+| `s` | Normal | Enter start threshold input |
+| `e` | Normal | Enter end threshold input |
+| `n` | Normal | Switch to next battery |
+| `q` | Normal | Quit |
+| `Ctrl+C` | Normal | Quit |
+| `Esc` | Input | Cancel input |
+| `Enter` | Input | Confirm and apply threshold |
+| `Backspace` | Input | Delete last digit |
+| `0-9` | Input | Append digit |
+
+## Configuration
+
+Auto-created on first run at `~/.config/bettery/config.toml`:
+
+```toml
+refresh_interval_ms = 2000
+charge_start_threshold = 20
+charge_end_threshold = 80
+```
+
+## Notes
+
+- **Root required** for setting charge thresholds. The sysfs files `charge_control_start_threshold` and `charge_control_end_threshold` require write privileges.
+- Tested on laptops with sysfs threshold support (Honor, Huawei, Lenovo, ASUS).
+- Config directory follows `$XDG_CONFIG_HOME` when set, otherwise defaults to `~/.config/`.

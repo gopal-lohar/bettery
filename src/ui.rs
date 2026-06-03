@@ -45,6 +45,7 @@ fn bar_line(pct: u16, width: usize, color: Color) -> Line<'static> {
     Line::from(v)
 }
 
+#[allow(clippy::too_many_arguments)]
 pub fn draw(
     f: &mut Frame,
     info: &BatteryInfo,

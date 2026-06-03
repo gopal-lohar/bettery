@@ -211,10 +211,8 @@ fn run(
                             app.input_buf.clear();
                             app.input_target = None;
                         }
-                        KeyCode::Char(c) if c.is_ascii_digit() => {
-                            if app.input_buf.len() < 3 {
-                                app.input_buf.push(c);
-                            }
+                        KeyCode::Char(c) if c.is_ascii_digit() && app.input_buf.len() < 3 => {
+                            app.input_buf.push(c);
                         }
                         _ => {}
                     }
